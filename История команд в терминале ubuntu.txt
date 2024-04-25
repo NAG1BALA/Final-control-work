@@ -1,0 +1,204 @@
+cat > Домашние животные
+  108  cat >Домашние животные
+  109  cat test
+  110  cat > test
+  111  ll
+  112  rm test
+  113  ll
+  114  cat reset
+  115  reset
+  116  cat 'Домашние животные'
+  117  cat > 'Домашние животные'
+  118  cat > 'Вьючные животные'
+  119  ls
+  120  rm Домашние
+  121  ls
+  122  cat 'Домашние животные
+  123  ls
+  124  cat 'Домашние животные' 'Вьючные животные' > Животные
+  125  ls
+  126  cat Животные
+  127  mv Животные 'Друзья человека'
+  128  ls
+  129  cat Друзья человека
+  130  cat 'Друзья человека'
+  131  mkdir directory
+  132  mv 'Друзья человека' directory
+  133  ls
+  134  tree
+  135  sudo apt install tree
+  136* wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-
+1_all.deb
+
+  137  wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-
+  138  1_all.deb
+  139  wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb
+  140  dpkg -i mysql-apt-config_0.8.12-1_all.deb
+  141  sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+  142  dpkg -i mysql-apt-config_0.8.29-1_all.deb
+  143  sudo dpkg -i mysql-apt-config_0.8.29-1_all.deb
+  144  sudo get apt update
+  145  sudo get-apt update
+  146  sudo apt get update
+  147  sudo apt-get update
+  148  sudo apt-get install mysql-server
+  149  systemctl status mysql
+  150  sudo apt-get install mysql-server
+  151  systemctl status mysql
+  152  sudo apt-get install mysql-server
+  153  systemctl status mysql
+  154  mysql --version
+  155  sudo mysql
+  156  sudo systemctl start mysql
+  157  cat systemctl status mysql.service
+  158  cat 'systemctl status mysql.service'
+  159  sudo apt install ufw
+  160  sudo ufw app list
+  161  sudo ufw allow OpenSSH
+  162  sudo apt update
+  163  sudo apt upgrade
+  164  sudo apt install ufw
+  165  sudo ufw app list
+  166  sudo ufw allow OpenSSH
+  167  sudo apt-get install ssh
+  168  sudo ufw allow OpenSSH
+  169  sudo ufw app list
+  170  sudo ufw enable
+  171  sudo ufw status
+  172  sudo apt install mysql-server
+  173  sudo systemctl start mysql
+  174  sudo systemctl status mysql
+  175  sudo systemctl restart mysql
+  176  $ sudo netstat -tlpn | grep "mysql"
+  177  $ sudo netstat -tlpn
+  178  systemctl status mysql.service
+  179  ps aux | grep mysqld
+  180  ps aux | grep mysql
+  181  kill -s 9 2728
+  182  sudo kill -s 9 2728
+  183  ps aux | grep mysqld
+  184  sudo kill -s 43348~ 
+  185  sudo kill -s 43348 
+  186  ps aux | grep mysqld
+  187  sudo kill -s 9 43348 
+  188  ps aux | grep mysqld
+  189  /usr/sbin/mysqld --wsrep-new-cluster --user=root &
+  190  ps aux | grep mysql
+  191  sudo systemctl status mysql
+  192  sudo service mysql stop
+  193  sudo systemctl status mysql
+  194  mysql --version
+  195  systemctl status mysql
+  196  sudo systemctl restart mysql
+  197  sudo mysql_secure_installation
+  198  /var/log/mysql/error.log
+  199  sudo /var/log/mysql/error.log
+  200  cd /var/log/mysql/error.log
+  201  sudo cd /var/log/mysql/error.log
+  202  cd sudo /var/log/mysql/error.log
+  203  /var
+  204  cd /var
+  205  cd /log
+  206  ll
+  207  cd log
+  208  cd mysql
+  209  ll
+  210  sudo su
+  211  cd
+  212  netstat
+  213  sudo apt intall net-tools
+  214  sudo apt install net-tools
+  215  netstat -tln
+  216  netstat -tlpn
+  217  sudo /etc/init.d/mysql restart
+  218  sudo ufw status
+  219  sudo ufw allow XXXX/tcp
+  220  sudo ufw allow 3306/tcp
+  221  sudo ufw deny 3306/tcp
+  222  sudo systemctl restart mysql
+  223  netstat -tlpn
+  224  sudo netstat -tlpn
+  225  /etc/my.cnf
+  226  /etc
+  227  cd etc
+  228  cd /etc
+  229  cd mysql
+  230  ll
+  231  cd my.cnf
+  232  cat my.cnf
+  233  nano my.cnf
+  234  sudo nano /etc/mysql/my.cnf
+  235  sudo systemctl restart mysql
+  236  nano my.cnf
+  237  netstat -tlpn
+  238  nano my.cnf
+  239  mysqladmin -u root version
+  240  sudo musql
+  241  sudo mysql
+  242  nano my.cnf
+  243  sudo nano my.cnf
+  244  sudo systemctl restart mysql
+  245* docker stop
+  246  sudo systemctl status docker
+  247  docker network prune
+  248  cd
+  249  netstat -tlpn
+  250  sudo netstat -tlpn
+  251  sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
+  252  sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli
+  253  docker rmi $(docker images -a -q)
+  254  docker stop $(docker ps -a -q)
+  255  docker rm $(docker ps -a -q)
+  256  docker system prune -a
+  257  $ dpkg -l | grep -i docker
+  258  sudo apt-get purge docker-ce docker-ce-cli containerd.io
+  259  sudo rm -rf /var/lib/docker /etc/docker
+  260  sudo groupdel docker
+  261  sudo rm -rf /var/run/docker.sock
+  262  sudo apt-get autoremove
+  263  docker rmi $(docker images -a -q)
+  264  sudo netstat -tlpn
+  265  docker rm $(docker ps -a -f status=exited -q)
+  266  docker
+  267  sudo apt-get purge docker-engine
+  268  sudo apt-get autoremove --purge docker-engine
+  269  rm -rf /var/lib/docker
+  270  sudo rm -rf /var/lib/docker /etc/docker
+  271  sudo rm /etc/apparmor.d/docker
+  272  sudo groupdel docker
+  273  ~sudo rm -rf /var/run/docker.sock
+  274  sudo rm -rf /var/run/docker.sock
+  275  sudo rm -rf /var/lib/containerd
+  276  sudo snap remove docker
+  277  sudo netstat -tlpn
+  278  sudo systemctl restart mysql
+  279  sudo systemctl status mysql
+  280  wget https://brave-browser-apt-release.s3.brave.com/pool/main/b/brave-browser/brave-browser_1.65.122_amd64.deb
+  281  ls -l *.deb
+  282  sudo dpkg - i brave-browser_1.65.122_amd64.deb
+  283  sudo dpkg -i brave-browser_1.65.122_amd64.deb
+  284  wget https://brave-browser-apt-release.s3.brave.com/pool/main/b/brave-keyring/brave-keyring_1.9-1.deb
+  285  ls -l *.deb
+  286  sudo dpkg -i brave-keyring_1.9-1.deb
+  287  sudo dpkg -i brave-browser_1.65.122_amd64.deb
+  288  sudo systemctl status brave
+  289  sudo systemctl status brave-browser
+  290  systemctl list-units --type service
+  291  sudo systemctl status brave-browser
+  292  cd
+  293  cd etc
+  294  cd /etc
+  295  cd apt
+  296  ls
+  297  cd sources.list.d/
+  298  ls
+  299  cd
+  300* 
+  301* 
+  302  ls -l *.deb
+  303  sudo dpkg -r 
+  304  sudo dpkg -r brave-keyring_1.9-1.deb
+  305  dpkg -l
+  306  sudo dpkg -r brave-browser
+  307  sudo dpkg -r brave-keyring
+  308  history
