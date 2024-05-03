@@ -1,0 +1,277 @@
+odi@bodi:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0,00 sec)
+mysql> CREATE DATABASE друзья_человека;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> show databases;
++-------------------------------+
+| Database                      |
++-------------------------------+
+| information_schema            |
+| mysql                         |
+| performance_schema            |
+| sys                           |
+| друзья_человека               |
++-------------------------------+
+5 rows in set (0,00 sec)
+
+mysql> use друзья_человека;
+Database changed
+mysql> CREATE TABLE Животные
+    -> (
+    -> Id INT AUTO_INCREMENT PRIMARY KEY,
+    -> Class_name VARCHAR(25)
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> show tables;
++-----------------------------------------+
+| Tables_in_друзья_человека               |
++-----------------------------------------+
+| Животные                                |
++-----------------------------------------+
+1 row in set (0,00 sec)
+
+mysql> INSERT INTO Животные (Class_name)
+    -> VALUES ('Домашние животные'),
+    -> ('Вьючные животные');
+Query OK, 2 rows affected (0,00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++-----------------------------------------+
+| Tables_in_друзья_человека               |
++-----------------------------------------+
+| Животные                                |
++-----------------------------------------+
+1 row in set (0,00 sec)
+
+mysql> SHOW CREATE TABLE Животные;
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table            | Create Table                                                                                                                                                                                                            |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Животные         | CREATE TABLE `Животные` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Class_name` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci         |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0,00 sec)
+mysql> CREATE TABLE Домашние_животные
+    -> (
+    -> Id INT AUTO_INCREMENT PRIMARY KEY,
+    -> Type_name VARCHAR (25),
+    -> Class_id INT,
+    -> FOREIGN KEY (Class_id) REFERENCES Животные (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0,02 sec)
+mysql> INSERT INTO Домашние_животные (Type_name, Class_id)
+    -> VALUES ('Собаки', 1),
+    -> ('Кошки', 1),
+    -> ('Хомяки', 1);
+Query OK, 3 rows affected (0,00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Вьючные_животные (  Id INT AUTO_INCREMENT PRIMARY KEY,  Type_name VARCHAR (25),  Class_id INT,  FOREIGN KEY (Class_id) REFERENCES Животные (Id) ON DELETE CASCADE ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,01 sec)
+mysql> INSERT INTO Вьючные_животные (Type_name, Class_id)
+    -> VALUES ('Лошади', 2),
+    -> ('Верблюды', 2)
+    -> ('Ослы', 2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('Ослы', 2)' at line 4
+mysql> INSERT INTO Вьючные_животные (Type_name, Class_id) VALUES ('Лошади', 2), ('Верблюды', 2), ('Ослы', 2);
+Query OK, 3 rows affected (0,00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Собаки
+    -> (
+    -> Id INT AUTO_INCREMENT PRIMARY KEY, 
+    -> Name VARCHAR(25),
+    -> Birthday DATE,
+    -> Commands VARCHAR(30),
+    -> Type_id int,
+    -> Foreign KEY (Type_id) REFERENCES Домашние_животные (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    -> );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Собаки (Name, Birthday, Commands, Type_id)
+    -> VALUES ('Пальма', '2015-16-09', 'лежать', 1),
+    -> ('Джерик', '2020-01-01', "голос", 1),
+    -> ('Лаки', '2013-20-11', "сидеть", 1); 
+ERROR 1292 (22007): Incorrect date value: '2015-16-09' for column 'Birthday' at row 1
+mysql> INSERT INTO Собаки (Name, Birthday, Commands, Type_id) VALUES ('Пальма', '2015-09-16', 'лежать', 1), ('Джерик', '2020-01-01', "голос", 1), ('Лаки', '2013-20-11', "сидеть", 1);
+ERROR 1292 (22007): Incorrect date value: '2013-20-11' for column 'Birthday' at row 3
+mysql> INSERT INTO Собаки (Name, Birthday, Commands, Type_id) VALUES ('Пальма', '2015-09-16', 'лежать', 1), ('Джерик', '2020-01-01', "голос", 1), ('Лаки', '2013-11-20', "сидеть", 1);
+Query OK, 3 rows affected (0,00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Кошки  ( Id INT AUTO_INCREMENT PRIMARY KEY,  Name VARCHAR(25), Birthday DATE, Commands VARCHAR(30), Type_id int, Foreign KEY (Type_id) REFERENCES Домашние_животные (Id) ON DELETE CASCA
+DE ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Кошки (Name, Birthday, Commands, Type_id) VALUES ('Симба', '2023-11-16', 'смирно', 2), ('Лимбо', '2018-09-12', "кругом", 2), ('Шот', '2018-03-20', "выстрел", 2);
+Query OK, 3 rows affected (0,00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Хомяки  ( Id INT AUTO_INCREMENT PRIMARY KEY,  Name VARCHAR(25), Birthday DATE, Commands VARCHAR(30), Type_id int, Foreign KEY (Type_id) REFERENCES Домашние_животные (Id) ON DELETE CASCADE ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> INSERT INTO Хомяки (Name, Birthday, Commands, Type_id) VALUES ('Шерсть', '2024-03-12', 'фас', 3), ('Круг', '2022-04-11', "бег", 3);
+Query OK, 2 rows affected (0,00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Лошади  ( Id INT AUTO_INCREMENT PRIMARY KEY,  Name VARCHAR(25), Birthday DATE, Commands VARCHAR(30), Type_id int, Foreign KEY (Type_id) REFERENCES Вьючные_животные (Id) ON DELETE CASCA
+DE ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Лошади (Name, Birthday, Commands, Type_id) VALUES ('Араб', '2020-05-08', 'копыто', 3), ('Тень', '2023-09-11', "галоп", 1);
+Query OK, 2 rows affected (0,00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Верблюды  ( Id INT AUTO_INCREMENT PRIMARY KEY,  Name VARCHAR(25), Birthday DATE, Commands VARCHAR(30), Type_id int, Foreign KEY (Type_id) REFERENCES Вьючные_животные (Id) ON DELETE CAS
+CADE ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Верблюды (Name, Birthday, Commands, Type_id) VALUES ('Горбуша', '2015-05-04', 'сидеть', 2), ('Ликер', '2021-03-06', "голос", 2);
+Query OK, 2 rows affected (0,00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Ослы  ( Id INT AUTO_INCREMENT PRIMARY KEY,  Name VARCHAR(25), Birthday DATE, Commands VARCHAR(30), Type_id int, Foreign KEY (Type_id) REFERENCES Вьючные_животные (Id) ON DELETE CASCADE
+ ON UPDATE CASCADE );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Ослы (Name, Birthday, Commands, Type_id) VALUES ('Бодибилдер', '2023-09-03', 'взял', 3), ('Паровоз', '2024-01-02', "остановка", 3);
+Query OK, 2 rows affected (0,00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> DELETE FROM Верблюды;
+Query OK, 2 rows affected (0,01 sec)
+mysql> SELECT Name, Birthday, Commands FROM Лошади UNION SELECT  Name, Birthday, Commands FROM Ослы;
++----------------------+------------+--------------------+
+| Name                 | Birthday   | Commands           |
++----------------------+------------+--------------------+
+| Араб                 | 2020-05-08 | копыто             |
+| Тень                 | 2023-09-11 | галоп              |
+| Бодибилдер           | 2023-09-03 | взял               |
+| Паровоз              | 2024-01-02 | остановка          |
++----------------------+------------+--------------------+
+4 rows in set (0,01 sec)
+
+mysql> CREATE TEMPORARY TABLE животные AS
+    -> SELECT *, 'Собаки' as type FROM Собаки
+    -> UNION SELECT *, 'Кошки' AS type FROM Кошки
+    -> UNION SELECT *, 'Хомяки' AS type FROM Хомяки
+    -> UNION SELECT *, 'Лошади' AS type FROM Лошади
+    -> UNION SELECT *, 'Ослы' AS type FROM Ослы;
+Query OK, 12 rows affected (0,00 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Молодые_животные AS
+    -> SELECT Name, Birthday, Commands, type, TIMESTAMPDIFF(MONTH, Birthday, CURDATE()) AS Age_in_month
+    -> FROM животные WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
+Query OK, 1 row affected (0,01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Молодые_животные;
++----------+------------+----------+--------------+--------------+
+| Name     | Birthday   | Commands | type         | Age_in_month |
++----------+------------+----------+--------------+--------------+
+| Круг     | 2022-04-11 | бег      | Хомяки       |           24 |
++----------+------------+----------+--------------+--------------+
+1 row in set (0,00 sec)
+mysql> SELECT d.Name, d.Birthday, d.Commands, ha.Type_name, ya.Age_in_month 
+    -> FROM Собаки d
+    -> LEFT JOIN Молодые животные ya ON ya.Name = d.Name
+    -> /с
+    -> \с
+ERROR: 
+Unknown command '\ '.
+    -> \с
+ERROR: 
+Unknown command '\ '.
+    -> /с
+    -> /с
+    -> \с
+ERROR: 
+Unknown command '\ '.
+    -> SELECT d.Name, d.Birthday, d.Commands, ha.Type_name, ya.Age_in_month
+    -> FROM Собаки d
+    -> LEFT JOIN Молодые_животные ya ON ya.Name = d.Name
+    -> LEFT JOIN Домашние_животные ha ON ha.Id = d.Type_id
+    -> UNION
+    -> SELECT c.Name, c.Birthday, c.Commands, ha.Type_name, ya.Age_in_month
+    -> FROM Кошки c
+    -> LEFT JOIN Молодые_животные ya ON ya.Name = c.Name
+    -> LEFT JOIN Домашние_животные ha ON ha.Id = c.Type_id
+    -> UNION
+    -> SELECT hm.Name, hm.Birthday, hm.Commands, ha.Type_name, ya.Age_in_month
+    -> FROM Хомяки hm
+    -> LEFT JOIN Молодые_животные ya ON ya.Name = hm.Name
+    -> LEFT JOIN Домашние_животные ha ON ha.Id = hm.Type_id
+    -> UNION
+    -> SELECT h.Name, h.Birthday, h.Commands, pa.Type_name, ya.Age_in_month
+    -> FROM Лошади h
+    -> LEFT JOIN Молодые_животные ya ON ya.Name = h.Name
+    -> LEFT JOIN Вьючные_животные pa ON pa.Id = h.Type_id
+    -> UNION
+    -> SELECT d.Name, d.Birthday, d.Commands, pa.Type_name, ya.Age_in_month
+    -> FROM Ослы d
+    -> LEFT JOIN Молодые_животные ya ON ya.Name = d.Name
+    -> LEFT JOIN Вьючные_животные pa ON pa.Id = d.Type_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ya ON ya.Name = d.Name
+/с
+\с
+\с
+/с
+/с
+\с
+SELECT d.Name, d.Birthday, d.Comm' at line 3
+mysql> SELECT d.Name, d.Birthday, d.Commands, ha.Type_name, ya.Age_in_month FROM Собаки d LEFT JOIN Молодые_животные ya ON ya.Name = d.Name LEFT JOIN Домашние_животные ha ON ha.Id = d.Type_id UNION SELECT c.Name, c.Birthday, c.Commands, ha.Type_name, ya.Age_in_month FROM Кошки c LEFT JOIN Молодые_животные ya ON ya.Name = c.Name LEFT JOIN Домашние_животные ha ON ha.Id = c.Type_id UNION SELECT hm.Name, hm.Birthday, hm.Commands, ha.Type_name, ya.Age_in_month FROM Хомяки hm LEFT JOIN Молодые_животные ya ON ya.Name = hm.Name LEFT JOIN Домашние_животные ha ON ha.Id = hm.Type_id UNION SELECT h.Name, h.Birthday,
+h.Commands, pa.Type_name, ya.Age_in_month FROM Лошади h LEFT JOIN Молодые_животные ya ON ya.Name = h.Name LEFT JOIN Вьючные_животные pa ON pa.Id = h.Type_id UNION SELECT d.Name, d.Birthday, d.Commands, pa.Type_name, ya.Age_in_month FROM Ослы d LEFT JOIN Молодые_животные ya ON ya.Name = d.Name LEFT JOIN Вьючные_животные pa ON pa.Id = d.Type_id;
++----------------------+------------+--------------------+--------------+--------------+
+| Name                 | Birthday   | Commands           | Type_name    | Age_in_month |
++----------------------+------------+--------------------+--------------+--------------+
+| Пальма               | 2015-09-16 | лежать             | Собаки       |         NULL |
+| Джерик               | 2020-01-01 | голос              | Собаки       |         NULL |
+| Лаки                 | 2013-11-20 | сидеть             | Собаки       |         NULL |
+| Симба                | 2023-11-16 | смирно             | Кошки        |         NULL |
+| Лимбо                | 2018-09-12 | кругом             | Кошки        |         NULL |
+| Шот                  | 2018-03-20 | выстрел            | Кошки        |         NULL |
+| Шерсть               | 2024-03-12 | фас                | Хомяки       |         NULL |
+| Круг                 | 2022-04-11 | бег                | Хомяки       |           24 |
+| Араб                 | 2020-05-08 | копыто             | Ослы         |         NULL |
+| Тень                 | 2023-09-11 | галоп              | Лошади       |         NULL |
+| Бодибилдер           | 2023-09-03 | взял               | Ослы         |         NULL |
+| Паровоз              | 2024-01-02 | остановка          | Ослы         |         NULL |
++----------------------+------------+--------------------+--------------+--------------+
+12 rows in set (0,00 sec)
+
+
+
+
+
+
+
+
