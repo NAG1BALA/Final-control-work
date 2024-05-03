@@ -1,4 +1,4 @@
-package model.animal_class.house;
+package model.house;
 
 import java.util.Iterator;
 import java.util.List;

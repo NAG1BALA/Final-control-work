@@ -1,6 +1,6 @@
-package model.animal_class;
+package model.animals;
 
-import model.animal_class.house.HouseItem;
+import model.house.HouseItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,18 +22,19 @@ public abstract class Animal implements Serializable, HouseItem {
         this.commands = new ArrayList<>();
     }
 
+    public void newCommand(String command) {
+        this.commands.add(command);
+    }
+
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public String getType() {
         return type;
     }
-
     public LocalDate getBirthdate() {
         return birthdate;
     }
@@ -50,15 +51,12 @@ public abstract class Animal implements Serializable, HouseItem {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
@@ -70,6 +68,6 @@ public abstract class Animal implements Serializable, HouseItem {
 
     @Override
     public String toString() {
-        return "ID:" + id + ", тип: " + type + ", кличка: " + name + ", дата рождения: " + birthdate + "\n";
+        return "ID:" + id + " кличка: " + name + ", дата рождения: " + birthdate;
     }
 }

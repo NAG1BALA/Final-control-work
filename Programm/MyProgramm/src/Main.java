@@ -1,4 +1,4 @@
-import model.animal_class.writer.FIleHandler;
+import model.writer.FIleHandler;
 import view.ConsoleUI;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

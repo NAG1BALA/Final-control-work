@@ -1,6 +1,6 @@
-package model.animal_class.pets;
+package model.animals.pets;
 
-import model.animal_class.Animal;
+import model.animals.Animal;
 
 import java.time.LocalDate;
 
