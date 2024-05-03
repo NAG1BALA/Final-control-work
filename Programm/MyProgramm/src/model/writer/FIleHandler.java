@@ -6,9 +6,12 @@ import java.io.*;
 
 public class FIleHandler implements Writable {
     private String filepath;
+
     @Override
     public boolean write(Serializable serializable, String filepath) {
+
         boolean flag = false;
+
         File file = new File(filepath);
         ObjectOutputStream oos = null;
         try (FileOutputStream fos = new FileOutputStream(file)){
@@ -17,6 +20,7 @@ public class FIleHandler implements Writable {
                 oos.writeObject(serializable);
                 flag = true;
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -24,6 +28,7 @@ public class FIleHandler implements Writable {
         }
         return flag;
     }
+
     @Override
     public Object read(String filepath) throws IOException {
         File file = new File(filepath);
@@ -43,4 +48,5 @@ public class FIleHandler implements Writable {
         }
         throw new InvalidObjectException("Что-то пошло не так...");
     }
+
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class House<E extends HouseItem> implements Serializable, Iterable<E> {
 
     private List<E> animalsInHouse;
-    private int oneId = 1; // хочу нумерацию с 1
+    private int oneId = 1;
     private int counter = 0;
 
     public House() {
@@ -36,18 +36,14 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         return null;
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new AnimalIterator<>(animalsInHouse);
-    }
-
     public String commandsById(int id) {
         StringBuilder sb = new StringBuilder("Id - ");
         sb.append(id).append("\n").append("\n");
         E animal = findInHouse(id);
         if (animal != null) {
             sb.append("Кличка: ").append(animal.getName() + "\n");
-            sb.append("Команды: ").append(animal.getCommands() + "\n");
+            sb.append("Тип: ").append(animal.getType() + "\n");
+            sb.append(animal.getCommands() + "\n");
             return sb.toString();
         }
         return "Данных нет.";
@@ -64,4 +60,16 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         }
         return stringBuilder.toString();
     }
+
+    public void deleteAnimal(int id) {
+        E animal = findInHouse(id);
+        animalsInHouse.remove(animal);
+        counter--;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new AnimalIterator<>(animalsInHouse);
+    }
+
 }

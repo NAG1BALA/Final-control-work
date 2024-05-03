@@ -12,10 +12,10 @@ public class AnimalBuilder {
     public Animal build(int type, String name, LocalDate birthdate) {
         switch (type) {
             case 1 -> {
-                return new Cat(name, birthdate);
+                return new Dog(name, birthdate);
             }
             case 2 -> {
-                return new Dog(name, birthdate);
+                return new Cat(name, birthdate);
             }
             case 3 -> {
                 return new Hamster(name, birthdate);

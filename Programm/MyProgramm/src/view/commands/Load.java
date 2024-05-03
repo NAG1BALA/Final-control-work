@@ -8,6 +8,7 @@ public class Load extends Command {
         super(consoleUI);
         description = "Загрузить из файла";
     }
+
     public void execute(){
         consoleUI.load();
     }

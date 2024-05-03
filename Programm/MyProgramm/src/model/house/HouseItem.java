@@ -13,4 +13,6 @@ public interface HouseItem {
     String getName();
 
     String getCommands();
+
+    String getType();
 }

@@ -1,18 +1,23 @@
 package presenter;
 
 import model.service.Service;
+import model.writer.Writable;
+import view.ConsoleUI;
 
-import javax.swing.text.View;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Presenter {
 
-    private View view;
+
+    private ConsoleUI view;
     private Service service;
-    public Presenter(View view) {
+
+    public Presenter(ConsoleUI view) {
         this.view = view;
         service = new Service();
     }
+
     public void setWritable(Writable writable) {
         service.setWritable(writable);
     }
@@ -59,5 +64,9 @@ public class Presenter {
     public void sortBirthDate() {
         service.sortBirthDate();
         view.printAnswer(service.getAnimals());
+    }
+
+    public boolean deleteAnimal(int id) {
+        return service.deleteAnimal(id);
     }
 }

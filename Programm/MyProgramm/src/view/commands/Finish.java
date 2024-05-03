@@ -8,6 +8,7 @@ public class Finish extends Command {
         super((consoleUI));
         description = "Завершить работу";
     }
+
     public void execute(){
         consoleUI.finish();
     }

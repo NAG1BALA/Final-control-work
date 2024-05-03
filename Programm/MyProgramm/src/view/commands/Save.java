@@ -8,6 +8,7 @@ public class Save extends Command {
         super(consoleUI);
         description = "Сохранить в файл";
     }
+
     public void execute(){
         consoleUI.save();
     }

@@ -3,7 +3,9 @@ package model.service;
 import model.animals.Animal;
 import model.builder.AnimalBuilder;
 import model.house.House;
+import model.writer.Writable;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -13,7 +15,8 @@ public class Service {
     private AnimalBuilder builder;
     private Writable writable;
 
-    @@ -16,5 +20,64 @@ public Service() {
+    public Service() {
+        house = new House();
         builder = new AnimalBuilder();
     }
 
@@ -76,5 +79,14 @@ public class Service {
 
     public String getAnimals() {
         return house.getAnimals();
+    }
+
+    public boolean deleteAnimal(int id) {
+        Animal animal = (Animal) house.findInHouse(id);
+        if (animal != null) {
+            house.deleteAnimal(id);
+            return true;
+        }
+        return false;
     }
 }
