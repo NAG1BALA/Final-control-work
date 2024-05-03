@@ -1,11 +1,13 @@
-package animal_class;
+package model.animal_class;
+
+import model.animal_class.house.HouseItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Animal implements Serializable {
+public abstract class Animal implements Serializable, HouseItem {
 
     private int id;
     private String name;
